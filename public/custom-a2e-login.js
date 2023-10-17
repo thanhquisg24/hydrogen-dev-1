@@ -25,7 +25,6 @@ async function postVerifyA2eCustomerData(data = {}) {
 }
 
 async function callA2eSubmitLogin(email, password) {
-  alert('hello a2e login!!!');
   const data = {email, password};
   try {
     const is_verify = await postVerifyA2eCustomerData(data);
@@ -36,12 +35,23 @@ async function callA2eSubmitLogin(email, password) {
   return false;
 }
 
+function sleep(lf_ms) {
+  return new Promise((resolve) => setTimeout(resolve, lf_ms));
+}
+
 async function onSubmitLogin(form) {
   alert('hello a2e login');
+  // const formData = new FormData(form.currentTarget);
+  // const email = formData.get('customer[email]');
+  // const pass = formData.get('customer[password]');
+  //const isVerify= await callA2eSubmitLogin(email, pass);
   const formData = new FormData(form.currentTarget);
-  const email = formData.get('email');
-  const pass = formData.get('password');
-  const isVerify = await callA2eSubmitLogin(email, pass);
+  const email = document.getElementById('CustomerEmail').value;
+  const pass = document.getElementById('CustomerPassword').value;
+  console.log('Test 1', email, pass);
+  await sleep(3000);
+  console.log('Test 2');
+  const isVerify = true;
   if (form !== undefined && isVerify) {
     form.submit();
   }
