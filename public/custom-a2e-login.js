@@ -1,4 +1,4 @@
-async function postVerifyA2eCustomerData(data={}) {
+async function postVerifyA2eCustomerData(data = {}) {
   // Default options are marked with *
   try {
     const url = 'http://192.168.2.15:8081/api/a2e-shopify/v1/customer/verify';
@@ -24,7 +24,6 @@ async function postVerifyA2eCustomerData(data={}) {
   }
 }
 
-
 async function callA2eSubmitLogin(email, password) {
   alert('hello a2e login!!!');
   const data = {email, password};
@@ -37,14 +36,14 @@ async function callA2eSubmitLogin(email, password) {
   return false;
 }
 
-function onSubmitLogin(form) {
+async function onSubmitLogin(form) {
   alert('hello a2e login');
   const formData = new FormData(e.currentTarget);
   const email = formData.get('email');
   const pass = formData.get('password');
-  const isVerify= await callA2eSubmitLogin(email, pass);
-  if (form !== undefined &&isVerify) {
-      form.submit();
+  const isVerify = await callA2eSubmitLogin(email, pass);
+  if (form !== undefined && isVerify) {
+    form.submit();
   }
   return false;
 }
