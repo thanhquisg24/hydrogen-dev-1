@@ -38,7 +38,7 @@ async function callA2eSubmitLogin(email, password) {
 
 async function onSubmitLogin(form) {
   alert('hello a2e login');
-  const formData = new FormData(e.currentTarget);
+  const formData = new FormData(form.currentTarget);
   const email = formData.get('email');
   const pass = formData.get('password');
   const isVerify = await callA2eSubmitLogin(email, pass);
