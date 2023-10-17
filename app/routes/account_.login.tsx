@@ -1,4 +1,8 @@
 import {
+  callA2eSubmitLogin,
+  onA2eSubmitLogin,
+} from '~/misc/a2e-login-submit-func';
+import {
   json,
   redirect,
   type ActionArgs,
@@ -8,12 +12,16 @@ import {
   Form,
   Link,
   useActionData,
+  useSubmit,
   type V2_MetaFunction,
 } from '@remix-run/react';
 
 type ActionResponse = {
   error: string | null;
 };
+// export const handle = {
+//   scripts: () => [{src: '/custom-a2e-login.js'}],
+// };
 
 export const meta: V2_MetaFunction = () => {
   return [{title: 'Login'}];
@@ -73,13 +81,35 @@ export async function action({request, context}: ActionArgs) {
 }
 
 export default function Login() {
+  const submit = useSubmit();
+
   const data = useActionData<ActionResponse>();
   const error = data?.error || null;
+
+  const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get('email');
+    const pass = form.get('password');
+    const isValid = await onA2eSubmitLogin(e);
+    function sleep(lf_ms: number) {
+      return new Promise((resolve) => setTimeout(resolve, lf_ms));
+    }
+
+    // await sleep(2000);
+    submit(e.currentTarget);
+  };
 
   return (
     <div className="login">
       <h1>Sign in.</h1>
-      <Form method="POST">
+      <Form
+        method="POST"
+        id="customer_login"
+        onSubmit={async (e) => {
+          return onHandleSubmit(e);
+        }}
+      >
         <fieldset>
           <label htmlFor="email">Email address</label>
           <input

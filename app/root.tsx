@@ -108,6 +108,7 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <script src="/custom-a2e-login.js"></script>
       </head>
       <body>
         <Layout {...data}>
