@@ -106,9 +106,9 @@ export default function Login() {
       <Form
         method="POST"
         id="customer_login"
-        onSubmit={async (e) => {
-          return onHandleSubmit(e);
-        }}
+        // onSubmit={async (e) => {
+        //   return onHandleSubmit(e);
+        // }}
       >
         <fieldset>
           <label htmlFor="email">Email address</label>
@@ -131,7 +131,6 @@ export default function Login() {
             autoComplete="current-password"
             placeholder="Password"
             aria-label="Password"
-            minLength={8}
             required
           />
         </fieldset>

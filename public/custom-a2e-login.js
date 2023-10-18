@@ -48,9 +48,9 @@ async function onSubmitLogin(form) {
   const formData = new FormData(form.currentTarget);
   const email = document.getElementById('CustomerEmail').value;
   const pass = document.getElementById('CustomerPassword').value;
-  console.log('Test 1', email, pass);
-  await sleep(3000);
-  console.log('Test 2');
+  // console.log('Test 1', email, pass);
+  // await sleep(3000);
+  // console.log('Test 2');
   const isVerify = true;
   if (form !== undefined && isVerify) {
     form.submit();
